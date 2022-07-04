@@ -1,6 +1,7 @@
 import 'package:first_app/misc/colors.dart';
 import 'package:first_app/widgets/app_large_text.dart';
 import 'package:first_app/widgets/app_text.dart';
+import 'package:first_app/widgets/responsive_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -16,6 +17,7 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
   int gottenStar = 4;
+  int selectedIndex = -1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,21 +122,60 @@ class _DetailPageState extends State<DetailPage> {
                     SizedBox(height: 15),
                     Wrap(
                       children: List.generate(5, (index) {
-                        return Container(
-                          margin: const EdgeInsets.only(right: 10),
-                          child: AppButtons(
-                            backgroundColor: AppColors.buttonBackground, 
-                            borderColor: AppColors.buttonBackground, 
-                            size: 50, 
-                            text: (index+1).toString(),
-                            color: Colors.black,),
+                        return InkWell(
+                          onTap: () {
+                            setState(() {
+                              selectedIndex = index;
+                            });
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.only(right: 10),
+                            child: AppButtons(
+                              backgroundColor: selectedIndex == index
+                                  ? Colors.black
+                                  : AppColors.buttonBackground,
+                              borderColor: AppColors.buttonBackground,
+                              size: 50,
+                              text: (index + 1).toString(),
+                              color: selectedIndex == index ? Colors.white : Colors.black,
+                            ),
+                          ),
                         );
                       }),
+                    ),
+                    SizedBox(height: 20),
+                    AppLargeText(text: "Description",color: Colors.black.withOpacity(0.8),size: 20,),
+                    SizedBox(height: 10,),
+                    AppText(text: "Yosemite National Park is located  in central Sierra Nevada in the US state of California. It is located near the wild protected areas",
+                      color: AppColors.mainTextColor,
                     )
                   ],
                 ),
               ),
             ),
+            Positioned(
+              bottom: 20,
+              left: 20,
+              right: 20,
+              child:
+                Row(
+                  children: [
+                    AppButtons(
+                      size: 60, 
+                      color: AppColors.mainColor, 
+                      backgroundColor: Colors.white, 
+                      borderColor: AppColors.mainColor,
+                      isIcon: true,
+                      icon: Icons.favorite_border,
+                      ),
+                    SizedBox(width: 20,),
+                    ResponsiveButton(
+                      isResponsive: true,
+                      text: "Book trip now",
+                    )
+                  ],
+                )
+              )
           ],
         ),
       ),
