@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+import 'widgets/app_buttons.dart';
+
 class DetailPage extends StatefulWidget {
   const DetailPage({Key? key}) : super(key: key);
 
@@ -88,11 +90,13 @@ class _DetailPageState extends State<DetailPage> {
                     SizedBox(height: 20),
                     Row(
                       children: [
-                        Wrap( 
+                        Wrap(
                           children: List.generate(5, (index) {
                             return Icon(
                               Icons.star,
-                               color: index < gottenStar ? AppColors.starColor :AppColors.textColor2,
+                              color: index < gottenStar
+                                  ? AppColors.starColor
+                                  : AppColors.textColor2,
                             );
                           }),
                         ),
@@ -103,6 +107,30 @@ class _DetailPageState extends State<DetailPage> {
                         )
                       ],
                     ),
+                    SizedBox(height: 25),
+                    AppLargeText(
+                      text: "People",
+                      color: Colors.black.withOpacity(0.8),
+                      size: 20,
+                    ),
+                    SizedBox(height: 5),
+                    AppText(
+                        text: "Number of people in your group",
+                        color: AppColors.mainTextColor),
+                    SizedBox(height: 15),
+                    Wrap(
+                      children: List.generate(5, (index) {
+                        return Container(
+                          margin: const EdgeInsets.only(right: 10),
+                          child: AppButtons(
+                            backgroundColor: AppColors.buttonBackground, 
+                            borderColor: AppColors.buttonBackground, 
+                            size: 50, 
+                            text: (index+1).toString(),
+                            color: Colors.black,),
+                        );
+                      }),
+                    )
                   ],
                 ),
               ),
