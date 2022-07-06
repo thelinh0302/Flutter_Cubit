@@ -2,6 +2,7 @@ import 'package:first_app/cubit/app_cubit.dart';
 import 'package:first_app/cubit/app_cubit_states.dart';
 import 'package:first_app/detail_page.dart';
 import 'package:first_app/home_page.dart';
+import 'package:first_app/pages/navpages/main_page.dart';
 import 'package:first_app/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -26,8 +27,7 @@ class _AppCubitsLogicState extends State<AppCubitsLogic> {
           } else if (state is DetailState) {
             return DetailPage();
           } else if (state is LoadedState) {
-            print("Loaded state");
-            return HomePage();
+            return MainPage();
           } else if (state is LoadingState) {
             return Center(
               child: CircularProgressIndicator(),
